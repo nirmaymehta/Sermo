@@ -2,9 +2,11 @@
 # platform :ios, '9.0'
 
 target 'Sermo' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for Sermo
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
 
 end
