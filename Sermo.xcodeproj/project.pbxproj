@@ -10,6 +10,7 @@
 		1EFBC71A5B381AA74BD9E1BA /* Pods_Sermo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF80F700CD0F96CF9663ED44 /* Pods_Sermo.framework */; };
 		383E38F42828353900C51243 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E38F32828353900C51243 /* Extensions.swift */; };
 		383E38F628284A4300C51243 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 383E38F528284A4300C51243 /* GoogleService-Info.plist */; };
+		38A9B7D32828EB6B0098F7C8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A9B7D22828EB6B0098F7C8 /* DatabaseManager.swift */; };
 		38F198F928264556003FE1DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F198F828264556003FE1DB /* AppDelegate.swift */; };
 		38F198FB28264556003FE1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F198FA28264556003FE1DB /* SceneDelegate.swift */; };
 		38F198FD28264556003FE1DB /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F198FC28264556003FE1DB /* ConversationsViewController.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		383E38F32828353900C51243 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		383E38F528284A4300C51243 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		38A9B7D22828EB6B0098F7C8 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		38F198F528264556003FE1DB /* Sermo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sermo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38F198F828264556003FE1DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38F198FA28264556003FE1DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				38F198F828264556003FE1DB /* AppDelegate.swift */,
 				38F198FA28264556003FE1DB /* SceneDelegate.swift */,
 				383E38F32828353900C51243 /* Extensions.swift */,
+				38A9B7D22828EB6B0098F7C8 /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38F1991328264BD6003FE1DB /* LoginViewController.swift in Sources */,
+				38A9B7D32828EB6B0098F7C8 /* DatabaseManager.swift in Sources */,
 				38F1991528264BE5003FE1DB /* RegisterViewController.swift in Sources */,
 				38F1991B28264DBE003FE1DB /* NewConversationViewController.swift in Sources */,
 				38F198FD28264556003FE1DB /* ConversationsViewController.swift in Sources */,

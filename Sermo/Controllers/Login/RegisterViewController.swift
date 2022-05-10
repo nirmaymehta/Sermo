@@ -17,7 +17,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person")
+        imageView.image = UIImage(systemName: "person.circle")
         imageView.tintColor = .gray
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = UIColor.lightGray.cgColor
@@ -107,7 +107,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Register"
@@ -131,9 +131,8 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
         scrollView.isUserInteractionEnabled = true
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePic))
-        //gesture.numberOfTouchesRequired =
         imageView.addGestureRecognizer(gesture)
-
+        
     }
     
     @objc private func didTapChangeProfilePic() {
@@ -171,19 +170,37 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
         
         //Firebase login
         
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
-            guard let result = authResult, error == nil else {
-                print ("Error creating user.")
+        DatabaseManager.shared.userExists(with: email, completion: { [weak self] exists in
+            guard let strongSelf = self else {
+                
                 return
             }
+            guard !exists else {
+                // User Already Exists
+                strongSelf.alertUserLoginError(message: "Looks like a user account for that email address already exists.")
+                return
+            }
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
+                guard let strongSelf = self else {
+                    
+                    return
+                }
+                guard authResult != nil, error == nil else {
+                    print ("Error creating user.")
+                    return
+                }
+                
+                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email))
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            })
             
-            let user = result.user
-            print("Created user : \(user)")
         })
+        
+        
     }
     
-    func alertUserLoginError() {
-        let alert = UIAlertController(title: "Whoops!", message: "Please enter all information to log in", preferredStyle: .alert)
+    func alertUserLoginError(message: String = "Please enter all information properly to continue.") {
+        let alert = UIAlertController(title: "Whoops!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated:true)
     }
@@ -215,7 +232,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate {
         actionSheet.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { [weak self] _ in   self?.presentCamera()}))
         actionSheet.addAction(UIAlertAction(title: "Choose Photo", style: .default, handler: { [weak self]_ in self?.presentPhotoPicker()}))
         present(actionSheet, animated: true)
-
+        
     }
     
     func presentCamera() {
@@ -236,7 +253,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-
+        
         print(info)
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
