@@ -7,6 +7,10 @@ target 'Sermo' do
   # Pods for Sermo
 pod 'Firebase/Core'
 pod 'Firebase/Database'
-pod 'Firebase/Auth'
+pod 'Firebase/Auth' 
+
+
+pod 'GoogleSignIn', '~> 5.0.2'
+pod 'FBSDKLoginKit'
 
 end
